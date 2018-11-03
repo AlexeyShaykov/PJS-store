@@ -1,0 +1,41 @@
+.header {
+  opacity: 1;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  background-color: #c5eff7;
+  &__basket {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    &:before {
+      position: absolute;
+      top: 4px;
+      left: 3px;
+      content: '';
+      width: 40px;
+      height: 40px;
+      vertical-align: bottom;
+      background-repeat: no-repeat;
+      background: url('../static/basket.svg');
+    }
+    &__quantity {
+      background: #2c82c9;
+      border: 2px solid #1b4365;
+      border-radius: 9px;
+      box-sizing: border-box;
+      font-size: 11px;
+      height: 18px;
+      line-height: 14px;
+      min-width: 18px;
+      padding: 0 2px;
+      position: absolute;
+      text-align: center;
+      left: 35px;
+      top: 17px;
+      opacity: 0;
+    }
+  }
+}
