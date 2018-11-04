@@ -18,12 +18,12 @@ const data = [
     productName: 'Компьютер',
     price: 40000,
     amount: 4,
-    maxPerPerson: 5
+    maxPerPerson: 3
   },
   {
     id: 4,
     productName: 'Утюг',
-    price: 10000,
+    price: 1000,
     amount: 10,
     maxPerPerson: 5
   }

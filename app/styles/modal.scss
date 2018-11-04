@@ -9,16 +9,8 @@
   visibility: hidden;
   width: 100%;
   z-index: 10;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -27,67 +19,53 @@
   visibility: visible;
 }
 
-.modal-wrap .modal-container {
+.modal-container {
   background: #fff;
-  margin: 1em;
+  margin: 1em auto;
   max-width: 100%;
-  width: 600px;
+  width: auto;
   z-index: 100;
+  &__header {
+    background: #c5eff7;
+    float: left;
+    width: 100%;
+    position: relative;
+    &__close-modal {
+      background: transparent;
+      border: 0;
+      color: #000;
+      cursor: pointer;
+      float: right;
+      font-size: nth($space, 5);
+      opacity: 0.4;
+      transition: all 0.3s ease-in-out;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &__title {
+      color: #000;
+      float: left;
+      font-size: 2em;
+      margin: 0;
+      padding: nth($space, 2) nth($space, 4);
+    }
+  }
+  &__content {
+    float: left;
+    margin: 0;
+    padding: nth($space, 2) nth($space, 4);
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
-.modal-wrap .modal-container .modal-header,
-.modal-wrap .modal-container .modal-footer {
-  background: #c5eff7;
-  float: left;
-  width: 100%;
-}
-
-.modal-wrap .modal-header .modal-title {
-  color: #000;
-  float: left;
-  font-size: 2em;
+.modal-loading {
+  position: absolute;
+  left: 50%;
   margin: 0;
-  padding: 15px 30px;
-}
-
-.modal-wrap .modal-header .close-modal {
-  background: transparent;
-  border: 0;
-  color: #000;
-  cursor: pointer;
-  float: right;
-  font-size: 40px;
-  opacity: 0.4;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.modal-wrap .modal-header .close-modal:hover {
-  opacity: 1;
-}
-
-.modal-wrap .modal-content {
-  float: left;
-  margin: 0;
-  padding: 15px 30px;
-  width: 100%;
-}
-
-.modal-wrap .modal-content p:last-child {
-  margin-bottom: 0;
-}
-
-.modal-wrap .modal-footer {
-  text-align: center;
-}
-
-.modal-wrap .modal-footer p {
-  color: #ccc;
-  font-size: 12px;
-  font-style: italic;
-  margin: 10px;
-}
-
-.modal-wrap .modal-footer a {
-  color: #fff;
+  transition: opacity 100ms;
 }

@@ -2,6 +2,7 @@
 @import './products.scss';
 @import './header.scss';
 @import './modal.scss';
+@import './basket.scss';
 
 body {
   font: 100% $font-stack;
@@ -13,21 +14,21 @@ body {
   padding-right: nth($space, 2);
   margin-left: auto;
   margin-right: auto;
-  padding-top: nth($space, 4);
-  padding-bottom: nth($space, 4);
   max-width: $containerWidth;
+  margin-top: nth($space, 5);
   position: relative;
   &__loader {
     text-align: center;
     position: absolute;
     left: 50%;
-    top: -13px;
-    &--hidden {
-      display: none;
-    }
+    top: -45px;
   }
 }
 
 .disabled {
   pointer-events: none;
+}
+
+.loader-hidden {
+  display: none;
 }

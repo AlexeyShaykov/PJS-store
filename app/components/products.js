@@ -15,14 +15,14 @@ class Products {
   createProducList = () => {
     const productList = document.querySelector(`.${this.produstClass}`);
     const productTitle = document.querySelector(`.${this.produstClass}__title`);
-    const categories = {};
+
     productTitle.innerHTML = 'Имеющиеся товары: ';
     this.products.forEach(item => {
       productTitle.innerHTML += `${item['productName']} - ${item['amount']} `;
 
       const product = document.createElement('div');
       product.classList.add(`${this.produstClass}__product`);
-      product.setAttribute('id', item.id);
+      product.setAttribute('id', `product-id${item.id}`);
 
       const productAmount = document.createElement('div');
       productAmount.classList.add('product__amount');
@@ -36,12 +36,19 @@ class Products {
       productPrice.classList.add('product__price');
       productPrice.innerHTML = `за ${item['price']} рублей`;
 
+      const productCount = document.createElement('input');
+      productCount.classList.add('product__count');
+      productCount.setAttribute('type', 'number');
+      productCount.setAttribute('value', 1);
+      productCount.setAttribute('min', 1);
+      productCount.setAttribute('max', item['amount']);
+
       const productBtn = document.createElement('div');
       productBtn.classList.add('product__btn');
       productBtn.innerHTML = 'Добавить в корзину';
       productBtn.addEventListener(
         'click',
-        () => this.handleToBasketClick(item),
+        () => this.handleProductBtnClick(item, productCount),
         false
       );
 
@@ -49,18 +56,30 @@ class Products {
       product.appendChild(productName);
       product.appendChild(productPrice);
       product.appendChild(productBtn);
+      product.appendChild(productCount);
 
       productList.appendChild(product);
-      categories[item.productName] = categories[item.productName] + 1 || 1;
     });
   };
 
-  handleToBasketClick = item => {
+  handleProductBtnClick = (item, productCount) => {
+    const productCountValue = parseInt(productCount.value);
+
+    if (productCountValue < 0 || productCountValue > item.maxPerPerson) {
+      const html = `<span> ${item.productName} нельзя добавить</span>`;
+      this.modal.showModal('Внимание ', html);
+
+      if (productCountValue < 0) {
+        productCount.value = 1;
+      }
+
+      return;
+    }
     this.app.toogleLoader();
     api
       .get('/actions')
       .then(data => {
-        this.basket.addToBasket(item);
+        this.basket.addToBasket(item, productCountValue);
       })
       .catch(e => {
         this.modal.showModal('Ошибка ', '<span>Что-то пошло не так</span>');
