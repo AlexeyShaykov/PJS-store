@@ -6,11 +6,11 @@ class Basket {
     this.modal = modal;
 
     this.hb = '.header__basket';
-    // heaer - icon basket
+    // header - icon basket
     this.headerBasketIcon = document.querySelector(this.hb);
     this.headerBasketIcon.addEventListener('click', this.showBasketModal);
 
-    // heaer - icon quantity
+    // header - icon quantity
     this.headerBasketQuantity = document.querySelector(`${this.hb}__quantity`);
 
     // header popup

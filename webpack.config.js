@@ -1,46 +1,44 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/src/index.html',
   filename: 'index.html',
   inject: 'body'
 });
 
-var ExtractTextPluginConfig = new ExtractTextPlugin('style.css');
-
-var entrypoint =
-  process.env.npm_lifecycle_event === 'dev'
-    ? 'webpack-dev-server/client?http://localhost:8080'
-    : './app/index.js';
-
 module.exports = {
-  entry: entrypoint,
+  entry: ['babel-polyfill', __dirname + '/src/index.js'],
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        include: __dirname + '/app',
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'stage-0']
+        test: /\.m?js$/,
+        include: __dirname + '/src',
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       },
       {
         test: /\.scss$/,
-        include: __dirname + '/app',
-        loader: ExtractTextPlugin.extract('css!sass')
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(jpg|png|svg)$/,
-        include: __dirname + '/app',
-        loader: 'url-loader'
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader'
+          }
+        ]
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]
+  plugins: [HtmlWebpackPluginConfig]
 };

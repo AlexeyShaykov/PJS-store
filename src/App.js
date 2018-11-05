@@ -14,6 +14,7 @@ class App {
   isLoaderVisible = true;
 
   onDOMLoaded = () => {
+    document.body.classList.remove('loading');
     api.get('/products').then(({ data }) => {
       this.toogleLoader();
       const products = new Products(data, this);

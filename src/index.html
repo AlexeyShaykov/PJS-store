@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>PJS store</title>
+  <style>
+    body.loading {
+        visibility: hidden;
+    }
+</style>
 </head>
-<body>
+<body class="loading">
   <div id="app">
     <div class="header">
       <div class="header__basket empty">
@@ -30,17 +35,17 @@
     </div>
   </div>
   <div class="modal-wrap" id="modal">
-  <div class="modal-container">
-    <div class="modal-container__header">
-      <div class="modal-container__header__title"></div>
-      <button class="modal-container__header__close-modal">&times;</button>
+    <div class="modal-container">
+      <div class="modal-container__header">
+        <div class="modal-container__header__title"></div>
+        <button class="modal-container__header__close-modal">&times;</button>
+      </div>
+      <div class="modal-container__content">
+      </div>
+      <p class="modal-loading loader-hidden">
+        Loading ...
+      </p>
     </div>
-    <div class="modal-container__content">
-    </div>
-    <p class="modal-loading loader-hidden">
-      Loading ...
-    </p>
   </div>
-</div>
 </body>
 </html>

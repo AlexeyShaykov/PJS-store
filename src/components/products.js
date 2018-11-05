@@ -65,12 +65,20 @@ class Products {
   handleProductBtnClick = (item, productCount) => {
     const productCountValue = parseInt(productCount.value);
 
-    if (productCountValue < 0 || productCountValue > item.maxPerPerson) {
+    if (
+      productCountValue < 0 ||
+      productCountValue > item.maxPerPerson ||
+      productCountValue > item.amount
+    ) {
       const html = `<span> ${item.productName} нельзя добавить</span>`;
       this.modal.showModal('Внимание ', html);
 
       if (productCountValue < 0) {
         productCount.value = 1;
+      }
+
+      if (productCountValue > item.amount) {
+        productCount.value = item.amount;
       }
 
       return;
