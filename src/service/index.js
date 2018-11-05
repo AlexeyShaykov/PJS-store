@@ -13,7 +13,7 @@ mock.onGet('/actions').reply(() => {
 	const random = Math.random() * 100;
 	return new Promise(resolve => {
 		if (random < 90) {
-			resolve([200, { id: 4, name: 'foo' }]);
+			resolve([200, {}]);
 		} else {
 			resolve([500, { success: false }]);
 		}

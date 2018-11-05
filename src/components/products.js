@@ -10,18 +10,18 @@ class Products {
 		this.modal = new Modal();
 		this.basket = new Basket(products, this.modal);
 	}
-	produstClass = 'products-list';
+	productClass = 'products-list';
 
 	createProductList = () => {
-		const productList = document.querySelector(`.${this.produstClass}`);
-		const productTitle = document.querySelector(`.${this.produstClass}__title`);
+		const productList = document.querySelector(`.${this.productClass}`);
+		const productTitle = document.querySelector(`.${this.productClass}__title`);
 
 		productTitle.innerHTML = 'Имеющиеся товары: ';
 		this.products.forEach(item => {
 			productTitle.innerHTML += `${item['productName']} - ${item['amount']} `;
 
 			const product = document.createElement('div');
-			product.classList.add(`${this.produstClass}__product`);
+			product.classList.add(`${this.productClass}__product`);
 			product.setAttribute('id', `product-id${item.id}`);
 
 			const productAmount = document.createElement('div');

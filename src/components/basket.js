@@ -17,7 +17,7 @@ class Basket {
 
 		this.hpp = '.basket-content';
 		// header popup content
-		this.headerPopupConten = document.querySelector(this.hpp);
+		this.headerPopupContent = document.querySelector(this.hpp);
 		// header popup counter
 		this.headerPopupCounter = document.querySelector(
 			`${this.hpp}__goods__counter`
@@ -34,22 +34,22 @@ class Basket {
 	}
 
 	total = 0;
-	totalAmmount = 0;
-	produstInBasket = {};
+	totalAmount = 0;
+	productInBasket = {};
 	isLoaderVisible = false;
 
 	addToBasket = (item, count) => {
-		const currentProduct = this.produstInBasket[item.productName];
+		const currentProduct = this.productInBasket[item.productName];
 
 		if (currentProduct && currentProduct + count > item.amount) {
 			this.showAlarm(item.productName);
 			return;
 		}
 
-		this.produstInBasket[item.productName] = currentProduct + count || count;
+		this.productInBasket[item.productName] = currentProduct + count || count;
 
 		this.total += count;
-		this.totalAmmount += count * item.price;
+		this.totalAmount += count * item.price;
 
 		this.changeHeader();
 	};
@@ -76,20 +76,20 @@ class Basket {
 
 	changeHeaderPopup = () => {
 		this.headerPopupCounter.innerHTML = `товаров - ${this.total}`;
-		this.headerPopupSumm.innerHTML = `${this.totalAmmount} рублей`;
+		this.headerPopupSumm.innerHTML = `${this.totalAmount} рублей`;
 	};
 
 	showBasketModal = () => {
-		if (Object.keys(this.produstInBasket).length === 0) return;
+		if (Object.keys(this.productInBasket).length === 0) return;
 
-		this.headerPopupConten.style.display = 'none';
+		this.headerPopupContent.style.display = 'none';
 
 		let html = '';
 
-		for (const item in this.produstInBasket) {
+		for (const item in this.productInBasket) {
 			const { price } = this.findByName(item);
 			html += `<div class="basket-product">
-      <div class="basket-product__amout">${this.produstInBasket[item]}</div>
+      <div class="basket-product__amout">${this.productInBasket[item]}</div>
       <div class="basket-product__big name">${item}</div>
       <div class="basket-product__big">за ${price} рублей</div>
       <div class="basket-product__small hovered add">+</div>
@@ -100,7 +100,7 @@ class Basket {
 
 		const goods = this.declOfNum(this.total);
 		const modalHeader = `В корзине ${this.total} ${goods} на сумму ${
-			this.totalAmmount
+			this.totalAmount
 		}`;
 
 		this.modal.showModal(modalHeader, html).then(() => {
@@ -116,7 +116,7 @@ class Basket {
 	handleClickCurrentProduct = (e, product) => {
 		const { target } = e;
 		const name = product.querySelector('.name').innerHTML;
-		const currentValue = this.produstInBasket[name];
+		const currentValue = this.productInBasket[name];
 		const DOMamount = product.querySelector('.basket-product__amout');
 		const { amount, price } = this.findByName(name);
 
@@ -125,7 +125,7 @@ class Basket {
 
 			this.changeBasketValues(name, price)
 				.then(() => {
-					DOMamount.innerHTML = this.produstInBasket[name];
+					DOMamount.innerHTML = this.productInBasket[name];
 				})
 				.catch(e => console.log(e));
 		} else if (target.className.includes('remove')) {
@@ -133,7 +133,7 @@ class Basket {
 
 			this.changeBasketValues(name, price, 'remove')
 				.then(() => {
-					DOMamount.innerHTML = this.produstInBasket[name];
+					DOMamount.innerHTML = this.productInBasket[name];
 				})
 				.catch(e => console.log(e));
 		} else if (target.className.includes('clear')) {
@@ -165,24 +165,24 @@ class Basket {
 				.get('/actions')
 				.then(() => {
 					if (option === 'add') {
-						this.totalAmmount += price;
+						this.totalAmount += price;
 						this.total += 1;
-						this.produstInBasket[name] = this.produstInBasket[name] + 1;
+						this.productInBasket[name] = this.productInBasket[name] + 1;
 					} else if (option === 'remove') {
-						this.totalAmmount -= price;
+						this.totalAmount -= price;
 						this.total -= 1;
-						this.produstInBasket[name] = this.produstInBasket[name] - 1;
+						this.productInBasket[name] = this.productInBasket[name] - 1;
 					} else {
-						const value = this.produstInBasket[name];
-						this.totalAmmount -= price * value;
+						const value = this.productInBasket[name];
+						this.totalAmount -= price * value;
 						this.total -= value;
-						delete this.produstInBasket[name];
+						delete this.productInBasket[name];
 					}
 
 					const goods = this.declOfNum(this.total);
 					this.modal.title.innerHTML = `В корзине ${
 						this.total
-					} ${goods} на сумму ${this.totalAmmount}`;
+					} ${goods} на сумму ${this.totalAmount}`;
 
 					this.changeHeader();
 					resolve();
