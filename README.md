@@ -13,7 +13,7 @@ yarn dev
 yarn build
 ```
 
-## :convenience_store: Demo
+## :convenience_store: Demo (if not open use vpn)
 
 https://pjs-store.netlify.com/
 
