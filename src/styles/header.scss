@@ -4,22 +4,22 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 40px;
+  height: nth($space, 5);
   background-color: #c5eff7;
   &__basket {
     display: flex;
     align-items: center;
     opacity: 0;
     position: relative;
-    height: 40px;
+    height: nth($space, 5);
     width: 55px;
     &:before {
       position: absolute;
       top: 4px;
       left: 3px;
       content: '';
-      width: 40px;
-      height: 40px;
+      width: nth($space, 5);
+      height: nth($space, 5);
       vertical-align: bottom;
       background-repeat: no-repeat;
       background: url('../static/basket.svg');
@@ -31,7 +31,6 @@
     &:hover:not(.empty) .basket-content {
       display: block;
     }
-
     &__quantity {
       background: #2c82c9;
       border: 2px solid #1b4365;
@@ -90,7 +89,7 @@
   }
   &__btn {
     width: 100%;
-    height: 40px;
+    height: nth($space, 5);
     background: none;
     border: 0;
     border-top: 1px solid #2c82c9;
