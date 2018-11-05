@@ -63,7 +63,7 @@ class Products {
 	};
 
 	handleProductBtnClick = (item, productCount) => {
-		const productCountValue = parseInt(productCount.value);
+		const productCountValue = parseInt(productCount.value, 10);
 
 		if (
 			productCountValue < 0 ||

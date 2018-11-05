@@ -1,4 +1,4 @@
-# RJS-store
+# PJS-store
 
 ## :hammer: Install
 
