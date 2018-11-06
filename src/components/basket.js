@@ -104,8 +104,8 @@ class Basket {
 		}`;
 
 		this.modal.showModal(modalHeader, html).then(() => {
-			const productsBasket = document.querySelectorAll('.basket-product');
-			Array.from(productsBasket).forEach(item => {
+			const productsBasket = [...document.querySelectorAll('.basket-product')];
+			productsBasket.forEach(item => {
 				item.addEventListener('click', e =>
 					this.handleClickCurrentProduct(e, item)
 				);
