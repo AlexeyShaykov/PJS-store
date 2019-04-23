@@ -15,7 +15,7 @@ yarn build
 
 ## :convenience_store: Demo (if not open use vpn)
 
-https://pjs-store.netlify.com/
+[demo](https://pjs-store.netlify.com/)
 
 ## :muscle: Technical stack
 
